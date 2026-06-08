@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Solhaven — Hotel boutique en la Sierra de Córdoba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { colors: { neutral: {
+    200:'#e9ddcd', 300:'#d4c2a8', 400:'#b39d80', 500:'#8c785f', 700:'#5b4a3a', 900:'#332821'
+  } } } } }
+</script>
+<style>
+:root{
+  --bg:#fbf4ea; --card:#fffcf6; --line:#ecdfcb;
+  --ink:#332821; --ink-soft:#7a6a5a;
+  --gold:#c9914c; --gold2:#a9763a;
+  --terra:#bd6b4f; --terra2:#a3563d;
+  --sage:#5b6e58;
+}
+*{font-family:'Outfit',sans-serif}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.01em}
+body{background:var(--bg);color:var(--ink)}
+.glass{background:rgba(255,252,246,.66);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);border:1px solid rgba(255,255,255,.7);box-shadow:0 6px 26px -16px rgba(120,90,60,.2)}
+.gold{color:var(--gold2)}
+.gold-bg{background:var(--gold)}
+.terra{color:var(--terra2)}
+.sage{color:var(--sage)}
+.btn-primary{background:var(--ink);color:#fbf4ea;font-weight:600;transition:all .25s;border-radius:999px;padding:15px 32px;border:none;cursor:pointer;letter-spacing:.02em}
+.btn-primary:hover{background:var(--terra2);transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(163,86,61,.4)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:14px 31px;font-weight:500;transition:all .2s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;transition:all .35s}
+.card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 20px 44px -20px rgba(201,145,76,.3)}
+.opt-btn{background:#fffcf6;border:1px solid var(--line);border-radius:14px;padding:15px 18px;transition:all .2s;cursor:pointer;font-weight:500;color:var(--ink-soft);text-align:left}
+.opt-btn:hover{border-color:var(--gold);color:var(--ink)}
+.opt-btn.active{background:var(--ink);color:#fbf4ea;border-color:var(--ink)}
+.fade-in{animation:fadein .55s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.serif-italic{font-style:italic;font-family:'Cormorant Garamond',serif}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#ddcab0;border-radius:8px}
+
+/* MAGAZINE GRID — composición asimétrica editorial */
+.mag-grid{display:grid;gap:1.1rem}
+@media(min-width:860px){
+  .mag-grid{grid-template-columns:1.15fr .85fr;grid-template-rows:auto auto;align-items:stretch}
+  .mag-hero{grid-row:span 2}
+}
+.mag-photo{border-radius:22px;overflow:hidden;position:relative;min-height:260px;background-size:cover;background-position:center}
+.mag-photo .mag-cap{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1.6rem;background:linear-gradient(0deg, rgba(51,40,33,.78), transparent 75%);color:#fbf4ea}
+.mag-photo .mag-cap p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem}
+
+/* HERO — encabezado editorial, capas superpuestas */
+.hero-edit{position:relative;min-height:78vh;border-radius:28px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-edit::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(51,40,33,.82) 8%, rgba(51,40,33,.18) 55%, rgba(51,40,33,.05) 100%)}
+.hero-edit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.hero-edit .hero-content{position:relative;z-index:1;color:#fbf4ea;padding:2.4rem}
+
+/* Kinetic reveal de letras del logo/título */
+.kin-letter{display:inline-block;opacity:0;transform:translateY(.4em);animation:kinl .65s cubic-bezier(.2,.9,.25,1) forwards}
+@keyframes kinl{to{opacity:1;transform:translateY(0)}}
+
+/* Tarjetas de habitación */
+.room-card{position:relative;border-radius:22px;overflow:hidden;background-size:cover;background-position:center;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.room-card:hover{transform:scale(1.015)}
+.room-card::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(51,40,33,.88) 12%, rgba(51,40,33,.18) 60%, transparent 100%)}
+.room-card .rc-body{position:relative;z-index:1;color:#fbf4ea;padding:1.6rem}
+.tag{display:inline-block;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.3rem .8rem;font-size:.74rem;font-weight:500;letter-spacing:.03em}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <span class="font-medium text-2xl tracking-tight" style="font-family:'Cormorant Garamond',serif">Sol<span class="serif-italic gold">haven</span></span>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-500">
+      <a href="#dia" class="hover:text-[var(--ink)] transition">Un día aquí</a>
+      <a href="#escapada" class="hover:text-[var(--ink)] transition">Tu escapada</a>
+      <a href="#habitaciones" class="hover:text-[var(--ink)] transition">Habitaciones</a>
+      <a href="#opiniones" class="hover:text-[var(--ink)] transition">Opiniones</a>
+    </div>
+    <a href="#escapada" class="btn-primary text-sm py-3 px-6">Reservar</a>
+  </div>
+</nav>
+
+<!-- HERO EDITORIAL -->
+<header class="pt-28 pb-6 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="hero-edit">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2400&q=75" alt="Terraza de Solhaven al atardecer, vistas a la sierra" loading="lazy"/>
+      <div class="hero-content">
+        <span class="tag mb-5 inline-block">📍 Sierra de Córdoba · 19 habitaciones · piscina y jardín de olivos</span>
+        <h1 class="text-4xl md:text-7xl leading-[1.05] mb-4">
+          <span class="kin-letter" style="animation-delay:.05s">Un</span> <span class="kin-letter" style="animation-delay:.13s">respiro</span><br/>
+          <span class="kin-letter serif-italic" style="animation-delay:.24s">a</span> <span class="kin-letter serif-italic" style="animation-delay:.32s">veinte</span> <span class="kin-letter serif-italic" style="animation-delay:.4s">minutos</span> <span class="kin-letter serif-italic" style="animation-delay:.48s">de</span> <span class="kin-letter serif-italic" style="animation-delay:.56s">la</span> <span class="kin-letter serif-italic" style="animation-delay:.64s">ciudad</span>
+        </h1>
+        <p class="max-w-md text-white/85 mb-2">19 habitaciones, una piscina con vistas a la sierra y un jardín de olivos centenarios donde el tiempo, simplemente, pasa más despacio.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- UN DÍA EN SOLHAVEN — composición de revista -->
+<section id="dia" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-12 max-w-2xl">
+      <span class="gold font-semibold uppercase tracking-widest text-sm">Un día en Solhaven</span>
+      <h2 class="text-3xl md:text-5xl mt-2">De un desayuno sin prisas a una cena bajo los olivos</h2>
+      <p class="text-[var(--ink-soft)] mt-3">No hay un único itinerario aquí — pero esto es, más o menos, cómo suele transcurrir un día de quien se aloja con nosotros.</p>
+    </div>
+
+    <div class="mag-grid">
+      <a href="#" class="mag-photo mag-hero" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1400&q=75')">
+        <div class="mag-cap"><p>"Desayuno en la terraza, con la sierra todavía cubierta de bruma."</p></div>
+      </a>
+      <a href="#" class="mag-photo" style="background-image:url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=75')">
+        <div class="mag-cap"><p>"El mediodía se queda en la piscina, sin reloj."</p></div>
+      </a>
+      <a href="#" class="mag-photo" style="background-image:url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1000&q=75')">
+        <div class="mag-cap"><p>"Y la cena, bajo los olivos, cuando cae el sol."</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ENCUENTRA TU ESCAPADA -->
+<section id="escapada" class="py-20 px-6">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-10">
+      <span class="terra font-semibold uppercase tracking-widest text-sm">Antes de reservar</span>
+      <h2 class="text-3xl md:text-5xl mt-2">¿Qué tipo de escapada estás buscando?</h2>
+      <p class="text-[var(--ink-soft)] mt-3">Dos preguntas y te proponemos la habitación y la experiencia que mejor encajan con lo que necesitas estos días.</p>
+    </div>
+
+    <div class="card p-8 md:p-10">
+      <div id="esc-q1">
+        <p class="font-semibold mb-4 text-lg" style="font-family:'Cormorant Garamond',serif">1. ¿Con quién viajas?</p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <button class="opt-btn" onclick="escPick(1,'pareja',this)">💑 En pareja</button>
+          <button class="opt-btn" onclick="escPick(1,'familia',this)">👨‍👩‍👧 En familia</button>
+          <button class="opt-btn" onclick="escPick(1,'solo',this)">🧘 Solo/a</button>
+          <button class="opt-btn" onclick="escPick(1,'amigos',this)">🥂 Con amigos</button>
+        </div>
+      </div>
+
+      <div id="esc-q2" class="hidden mt-8 pt-8 border-t border-[var(--line)]">
+        <p class="font-semibold mb-4 text-lg" style="font-family:'Cormorant Garamond',serif">2. ¿Qué te apetece más, sobre todo?</p>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <button class="opt-btn" onclick="escPick(2,'desconectar',this)">🌿 Desconectar de verdad</button>
+          <button class="opt-btn" onclick="escPick(2,'explorar',this)">🥾 Explorar la sierra</button>
+          <button class="opt-btn" onclick="escPick(2,'celebrar',this)">🍷 Celebrar algo</button>
+        </div>
+      </div>
+
+      <div id="esc-result" class="hidden mt-8 pt-8 border-t border-[var(--line)] fade-in">
+        <p class="text-xs uppercase tracking-widest font-semibold text-[var(--ink-soft)] mb-3">Tu escapada en Solhaven</p>
+        <div class="flex items-start gap-4">
+          <span id="esc-emoji" class="text-4xl"></span>
+          <div>
+            <h3 id="esc-name" class="text-2xl font-medium mb-1" style="font-family:'Cormorant Garamond',serif"></h3>
+            <p id="esc-desc" class="text-[var(--ink-soft)] mb-3"></p>
+            <div class="glass rounded-xl px-5 py-3 inline-block">
+              <p class="text-sm"><span class="font-semibold">Te proponemos:</span> <span id="esc-extra"></span></p>
+            </div>
+          </div>
+        </div>
+        <button onclick="escReset()" class="mt-6 text-sm font-medium text-[var(--ink-soft)] hover:text-[var(--ink)] transition">↺ Volver a empezar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HABITACIONES -->
+<section id="habitaciones" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="gold font-semibold uppercase tracking-widest text-sm">Dónde vas a quedarte</span>
+      <h2 class="text-3xl md:text-5xl mt-2">Cuatro maneras de despertarse aquí</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="room-card" style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1100&q=75')">
+        <div class="rc-body">
+          <span class="tag mb-2 inline-block">desde 119 €/noche</span>
+          <h3 class="text-2xl font-medium" style="font-family:'Cormorant Garamond',serif">Habitación Olivar</h3>
+          <p class="text-white/80 text-sm mt-1">Vistas al jardín de olivos, terraza privada y bañera exenta.</p>
+        </div>
+      </div>
+      <div class="room-card" style="background-image:url('https://images.unsplash.com/photo-1615460549969-36fa19521a4f?auto=format&fit=crop&w=1100&q=75')">
+        <div class="rc-body">
+          <span class="tag mb-2 inline-block">desde 149 €/noche</span>
+          <h3 class="text-2xl font-medium" style="font-family:'Cormorant Garamond',serif">Suite Sierra</h3>
+          <p class="text-white/80 text-sm mt-1">La más espaciosa, con salón propio y vistas frontales a la sierra.</p>
+        </div>
+      </div>
+      <div class="room-card" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1100&q=75')">
+        <div class="rc-body">
+          <span class="tag mb-2 inline-block">desde 99 €/noche</span>
+          <h3 class="text-2xl font-medium" style="font-family:'Cormorant Garamond',serif">Habitación Patio</h3>
+          <p class="text-white/80 text-sm mt-1">Asomada al patio interior, fresca incluso en pleno agosto.</p>
+        </div>
+      </div>
+      <div class="room-card" style="background-image:url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1100&q=75')">
+        <div class="rc-body">
+          <span class="tag mb-2 inline-block">desde 189 €/noche</span>
+          <h3 class="text-2xl font-medium" style="font-family:'Cormorant Garamond',serif">Casita de la Piscina</h3>
+          <p class="text-white/80 text-sm mt-1">Independiente, con acceso directo a la piscina y porche propio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPINIONES -->
+<section id="opiniones" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="terra font-semibold uppercase tracking-widest text-sm">Quien ha pasado por aquí, vuelve</span>
+      <h2 class="text-3xl md:text-5xl mt-2">Algunas líneas de nuestros huéspedes</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+      <div class="card p-6 text-center"><p class="text-3xl gold mb-1" style="font-family:'Cormorant Garamond',serif">9.4 / 10</p><p class="text-sm text-[var(--ink-soft)]">en plataformas de reserva</p></div>
+      <div class="card p-6 text-center"><p class="text-3xl gold mb-1" style="font-family:'Cormorant Garamond',serif">19</p><p class="text-sm text-[var(--ink-soft)]">habitaciones, todas distintas</p></div>
+      <div class="card p-6 text-center"><p class="text-3xl gold mb-1" style="font-family:'Cormorant Garamond',serif">68%</p><p class="text-sm text-[var(--ink-soft)]">de huéspedes que repiten</p></div>
+      <div class="card p-6 text-center"><p class="text-3xl gold mb-1" style="font-family:'Cormorant Garamond',serif">+200</p><p class="text-sm text-[var(--ink-soft)]">años tienen nuestros olivos</p></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6">
+        <p class="text-[var(--ink)] mb-4">"Llegamos pensando en pasar dos noches y nos quedamos cuatro. El desayuno en la terraza, con la sierra de fondo, es de esas cosas que recuerdas meses después."</p>
+        <p class="font-medium" style="font-family:'Cormorant Garamond',serif">— Lucía y Adrián <span class="text-[var(--ink-soft)] font-normal not-italic text-sm">· escapada en pareja</span></p>
+      </div>
+      <div class="card p-6">
+        <p class="text-[var(--ink)] mb-4">"Vinimos los cuatro y los niños no quisieron salir de la piscina en todo el fin de semana. Nosotros, mientras tanto, nos sentamos bajo los olivos con una copa de vino. Para repetir."</p>
+        <p class="font-medium" style="font-family:'Cormorant Garamond',serif">— Familia Ortega <span class="text-[var(--ink-soft)] font-normal not-italic text-sm">· escapada en familia</span></p>
+      </div>
+      <div class="card p-6">
+        <p class="text-[var(--ink)] mb-4">"Fui sola, sin planes, justo después de un año complicado. Tres días de caminar por la sierra y no hablar con nadie me sentaron mejor que cualquier otra cosa que hubiera podido hacer."</p>
+        <p class="font-medium" style="font-family:'Cormorant Garamond',serif">— Marta V. <span class="text-[var(--ink-soft)] font-normal not-italic text-sm">· escapada en solitario</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-20 px-6">
+  <div class="max-w-4xl mx-auto card p-12 text-center relative overflow-hidden">
+    <div class="absolute inset-0 -z-10" style="background:radial-gradient(circle at 24% 30%, rgba(201,145,76,.12), transparent 55%), radial-gradient(circle at 78% 74%, rgba(189,107,79,.12), transparent 55%);"></div>
+    <h2 class="text-3xl md:text-5xl mb-4">¿Reservamos tu próximo respiro?</h2>
+    <p class="text-[var(--ink-soft)] max-w-xl mx-auto mb-8">Cuéntanos las fechas que tienes en mente y te proponemos la habitación que mejor encaja — sin letra pequeña ni cargos sorpresa al llegar.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#escapada" class="btn-primary">Encuentra tu escapada</a>
+      <a href="#habitaciones" class="btn-ghost">Ver habitaciones</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-6 border-t border-neutral-700">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[var(--ink-soft)]">
+    <span class="font-medium text-lg" style="font-family:'Cormorant Garamond',serif">Sol<span class="serif-italic gold">haven</span></span>
+    <p>Carretera de la Sierra, km 7 · Córdoba</p>
+    <p>© 2026 Solhaven. Diecinueve habitaciones, un único ritmo: el tuyo.</p>
+  </div>
+</footer>
+
+<script>
+const escState = {};
+const escapadas = {
+  'pareja|desconectar':   { emoji:'💑', name:'Una pausa solo para los dos', desc:'Sin planes cerrados, sin prisa: desayunos largos, piscina y atardeceres bajo los olivos.', extra:'Habitación Olivar + cena privada bajo los olivos la última noche' },
+  'pareja|explorar':      { emoji:'🥾', name:'Sierra de día, calma de noche', desc:'Rutas cortas por la mañana y la piscina y la terraza esperando a la vuelta.', extra:'Suite Sierra + ruta guiada de medio día por el parque natural' },
+  'pareja|celebrar':      { emoji:'🍷', name:'Algo que merece una copa de más', desc:'Aniversario, compromiso o simplemente ganas de celebrar — lo organizamos con vosotros.', extra:'Casita de la Piscina + cena de cuatro platos y copa de bienvenida' },
+  'familia|desconectar':  { emoji:'🌿', name:'Que cada uno encuentre su ritmo', desc:'Los peques en la piscina, los mayores bajo los olivos — espacio para todos sin agobios.', extra:'Suite Sierra + acceso prioritario a la piscina familiar' },
+  'familia|explorar':     { emoji:'🥾', name:'Una sierra que también es para niños', desc:'Rutas cortas y sencillas, con paradas para mirar lagartos y comer en el campo.', extra:'Habitación Olivar + ruta familiar guiada con picnic incluido' },
+  'familia|celebrar':     { emoji:'🍷', name:'Una celebración con espacio de sobra', desc:'Cumpleaños, reencuentros o simplemente una excusa para estar todos juntos.', extra:'Casita de la Piscina + mesa reservada bajo los olivos para todo el grupo' },
+  'solo|desconectar':     { emoji:'🧘', name:'Tres días sin tener que dar explicaciones', desc:'Nadie te va a preguntar qué planes tienes. Aquí, no hacer nada también es un plan.', extra:'Habitación Patio + acceso a la biblioteca y la sala de lectura' },
+  'solo|explorar':        { emoji:'🥾', name:'La sierra a tu propio paso', desc:'Rutas que puedes alargar o acortar según te apetezca, sin tener que esperar a nadie.', extra:'Habitación Olivar + mapa de rutas y mochila de senderismo prestada' },
+  'solo|celebrar':        { emoji:'🍷', name:'Un brindis contigo mismo/a', desc:'A veces lo que se celebra es justo haber llegado hasta aquí. También merece su copa.', extra:'Suite Sierra + cena con copa de vino en la terraza, solo para ti' },
+  'amigos|desconectar':   { emoji:'🌿', name:'El grupo, pero en modo lento', desc:'Piscina por el día, sobremesas que no acaban y una sierra preciosa de fondo.', extra:'Dos Habitaciones Patio juntas + zona de la piscina reservada por la tarde' },
+  'amigos|explorar':      { emoji:'🥾', name:'Aventura de fin de semana entre amigos', desc:'Rutas por la sierra de día, cenas largas y juegos de mesa por la noche.', extra:'Suite Sierra + Habitación Olivar + ruta de senderismo guiada para el grupo' },
+  'amigos|celebrar':      { emoji:'🍷', name:'La excusa perfecta para juntaros', desc:'Despedidas, cumpleaños redondos o simplemente "hace mucho que no quedamos en condiciones".', extra:'Casita de la Piscina + cena privada bajo los olivos para todo el grupo' },
+};
+
+function escPick(step, value, btn){
+  escState['s'+step] = value;
+  const group = btn.parentElement;
+  [...group.children].forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  if (step === 1){
+    document.getElementById('esc-q2').classList.remove('hidden');
+    document.getElementById('esc-q2').classList.add('fade-in');
+  }
+  if (step === 2){
+    const key = `${escState.s1}|${escState.s2}`;
+    const e = escapadas[key];
+    if (!e) return;
+    document.getElementById('esc-emoji').textContent = e.emoji;
+    document.getElementById('esc-name').textContent = e.name;
+    document.getElementById('esc-desc').textContent = e.desc;
+    document.getElementById('esc-extra').textContent = e.extra;
+    const result = document.getElementById('esc-result');
+    result.classList.remove('hidden');
+    result.classList.remove('fade-in'); void result.offsetWidth; result.classList.add('fade-in');
+    result.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+}
+function escReset(){
+  escState.s1 = escState.s2 = undefined;
+  ['esc-q2','esc-result'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('esc-q1').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+</script>
+
+</body>
+</html>
